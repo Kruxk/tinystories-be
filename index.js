@@ -1,15 +1,26 @@
 const express = require("express");
 const app = express();
 const corsMiddleWare = require("cors");
+const promptsRouter = require("./routers/prompts");
+const storyRouter = require("./routers/stories");
+const userRouter = require("./routers/users");
 
 const PORT = 4000;
 
 //bodyparser
 app.use(express.json());
 //cors middleware
-app.use(corsMiddleWare);
+app.use(corsMiddleWare());
 
-// testing endpoint
+app.use("/prompts", promptsRouter);
+app.use("/stories", storyRouter);
+app.use("/users", userRouter);
+
+// testing endpoints
+app.get("/", (req, res) => {
+  res.send("Hi from express");
+});
+
 app.post("/echo", (req, res) => {
   res.json(req.body);
 });

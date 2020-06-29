@@ -4,6 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
+    "dev": "npx nodemon .",
+    "initdev": "npm run createDB && npm run migrate && npm run seed",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
+    "createDB": "npx sequelize-cli db:create",
+    "dropDB": "npx sequelize-cli db:drop",
+    "resetDB": "npm run dropDB && npm run initdev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +20,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "nodemon": "^2.0.4",
     "pg": "^8.2.1",
     "sequelize": "^6.2.3",
     "sequelize-cli": "^6.1.0"
