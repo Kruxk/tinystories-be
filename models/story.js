@@ -8,14 +8,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      story.belongsTo(models.user);
+      story.belongsTo(models.prompt);
     }
   }
   story.init(
     {
       description: { type: DataTypes.STRING, allowNull: false },
       name: DataTypes.STRING,
-      promptId: { type: DataTypes.NUMBER, allowNull: false },
+      promptId: { type: DataTypes.INTEGER, allowNull: false },
+      userId: { type: DataTypes.INTEGER, allowNull: false },
     },
     {
       sequelize,

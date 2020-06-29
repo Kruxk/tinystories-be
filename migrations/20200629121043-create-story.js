@@ -16,12 +16,20 @@ module.exports = {
         type: Sequelize.STRING,
       },
       promptId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "prompts",
+          key: "id",
+        },
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
