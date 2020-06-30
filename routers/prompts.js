@@ -13,4 +13,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const prompt = await Prompt.findByPk(req.params.id, { include: [Story] });
+    res.send(prompt);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
