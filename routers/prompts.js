@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const Prompt = require("../models").prompt;
+const Story = require("../models").story;
 
 const router = new Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    console.log("req received");
-    const prompts = await Prompt.findAll();
+    const prompts = await Prompt.findAll({ include: [Story] });
     res.send(prompts);
   } catch (e) {
     next(e);
