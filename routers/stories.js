@@ -12,4 +12,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/new", async (req, res, next) => {
+  const { description, name, promptId, userId } = req.body;
+  try {
+    // console.log("Story:", { description, name, promptId, userId });
+    // res.send("received!");
+    const newStory = await Story.create({
+      description,
+      name,
+      promptId,
+      userId,
+    });
+    res.send(newStory);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
