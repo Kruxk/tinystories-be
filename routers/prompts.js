@@ -22,4 +22,14 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.post("/new", async (req, res, next) => {
+  const { userId, description, name } = req.body;
+  try {
+    const newPrompt = await Prompt.create({ userId, description, name });
+    res.send(newPrompt);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
