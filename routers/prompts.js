@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const authMiddleWare = require("../auth/middleware");
 const Prompt = require("../models").prompt;
 const Story = require("../models").story;
 
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/new", async (req, res, next) => {
+router.post("/new", authMiddleWare, async (req, res, next) => {
   const { userId, description, name } = req.body;
   try {
     const newPrompt = await Prompt.create({ userId, description, name });
