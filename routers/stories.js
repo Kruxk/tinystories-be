@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const authMiddleWare = require("../auth/middleware");
 const Story = require("../models").story;
 
 const router = new Router();
@@ -12,7 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/new", async (req, res, next) => {
+router.post("/new", authMiddleWare, async (req, res, next) => {
   const { description, name, promptId, userId } = req.body;
   try {
     const newStory = await Story.create({
