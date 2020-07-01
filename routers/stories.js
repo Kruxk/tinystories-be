@@ -28,4 +28,18 @@ router.post("/new", authMiddleWare, async (req, res, next) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res, next) => {
+  console.log("Delete story with id:", req.params.id);
+  try {
+    const deleteStory = await Story.destroy({ where: { id: req.params.id } });
+    if (deleteStory) {
+      res.send("received");
+    } else {
+      res.send("Already deleted");
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
