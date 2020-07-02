@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { SALT_ROUNDS } = require("../config/constants");
 const bcrypt = require("bcrypt");
 const { toJWT } = require("../auth/jwt");
+const authMiddleWare = require("../auth/middleware");
 const User = require("../models").user;
 
 const router = new Router();
@@ -69,6 +70,20 @@ router.post("/signup", async (req, res) => {
     }
 
     return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
+
+router.post("/picture", authMiddleWare, async (req, res, next) => {
+  const { id } = req.user.dataValues;
+  const { url } = req.body;
+  try {
+    const user = await User.findByPk(id);
+    user.update({
+      picture: url,
+    });
+    res.send(user.dataValues.picture);
+  } catch (error) {
+    console.log(error);
   }
 });
 
