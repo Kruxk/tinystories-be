@@ -33,6 +33,20 @@ router.post("/new", authMiddleWare, async (req, res, next) => {
   }
 });
 
+router.patch("/edit/:id", authMiddleWare, async (req, res, next) => {
+  const { description, name } = req.body;
+  const id = req.params.id;
+  try {
+    const promptEdit = await Prompt.update(
+      { description, name },
+      { where: { id: id } }
+    );
+    res.send(promptEdit);
+  } catch (e) {
+    next(e);
+  }
+});
+
 router.delete("/delete/:id", authMiddleWare, async (req, res, next) => {
   try {
     await Story.destroy({ where: { promptId: req.params.id } });
