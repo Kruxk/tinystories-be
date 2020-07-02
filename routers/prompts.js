@@ -36,6 +36,7 @@ router.post("/new", authMiddleWare, async (req, res, next) => {
 router.delete("/delete/:id", async (req, res, next) => {
   try {
     //console.log("deleting prompt with id:", req.params.id);
+    await Story.destroy({ where: { promptId: req.params.id } });
     const deletePrompt = await Prompt.destroy({ where: { id: req.params.id } });
     if (deletePrompt) {
       res.send("received and destroyed");
