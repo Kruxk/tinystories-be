@@ -13,6 +13,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const stories = await Story.findAll({ where: { userId: req.params.id } });
+    res.send(stories);
+  } catch (e) {
+    next(e);
+  }
+});
+
 router.post("/new", authMiddleWare, async (req, res, next) => {
   const { description, name, promptId, userId } = req.body;
   try {
@@ -28,7 +37,7 @@ router.post("/new", authMiddleWare, async (req, res, next) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res, next) => {
+router.delete("/delete/:id", authMiddleWare, async (req, res, next) => {
   console.log("Delete story with id:", req.params.id);
   try {
     const deleteStory = await Story.destroy({ where: { id: req.params.id } });
