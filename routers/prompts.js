@@ -33,4 +33,18 @@ router.post("/new", authMiddleWare, async (req, res, next) => {
   }
 });
 
+router.delete("/delete/:id", authMiddleWare, async (req, res, next) => {
+  try {
+    await Story.destroy({ where: { promptId: req.params.id } });
+    const deletePrompt = await Prompt.destroy({ where: { id: req.params.id } });
+    if (deletePrompt) {
+      res.send("received and destroyed");
+    } else {
+      res.send("is already deleted");
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
