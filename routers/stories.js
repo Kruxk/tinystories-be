@@ -51,4 +51,21 @@ router.delete("/delete/:id", authMiddleWare, async (req, res, next) => {
   }
 });
 
+router.patch("/edit/:id", authMiddleWare, async (req, res, next) => {
+  const { name, description } = req.body;
+  const { id } = req.params;
+  try {
+    const storyToEdit = await Story.update(
+      {
+        name,
+        description,
+      },
+      { where: { id } }
+    );
+    res.status(200).send({ message: "Story updated succesfully" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
