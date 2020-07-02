@@ -33,4 +33,12 @@ router.post("/new", authMiddleWare, async (req, res, next) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    console.log("deleting prompt with id:", req.params.id);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
