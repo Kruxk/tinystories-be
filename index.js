@@ -4,8 +4,7 @@ const corsMiddleWare = require("cors");
 const promptsRouter = require("./routers/prompts");
 const storyRouter = require("./routers/stories");
 const userRouter = require("./routers/users");
-
-const PORT = 4000;
+const { PORT } = require("./config/constants");
 
 //bodyparser
 app.use(express.json());
