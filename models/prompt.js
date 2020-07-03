@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   prompt.init(
     {
       userId: { type: DataTypes.NUMBER, allowNull: false },
-      description: { type: DataTypes.STRING, allowNull: false },
+      description: { type: DataTypes.TEXT, allowNull: false },
       name: DataTypes.STRING,
     },
     {

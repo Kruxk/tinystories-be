@@ -43,7 +43,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          userid: reinko.id,
+          userId: reinko.id,
           name: "Vigilante Power",
           description: `You are a vigilante with strange power - you can devise a plan that will solve any situation you might be in and it will work flawlessly, but only if you explain said plan in excruciating detail to the villain you're about to defeat.`,
           createdAt: new Date(),
